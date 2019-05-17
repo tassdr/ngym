@@ -1,0 +1,150 @@
+<ng-container>
+  <div class="wrapper">
+
+    <!-- Add button and search field -->
+    <div style="display: flex; margin-top: 9vh; width: 95%;">
+      <button
+        style="height: 5.5vh; align-self: center"
+        mat-raised-button
+        color="accent"
+        matTooltip="Add a new member"
+        (click)="onCreate()"
+      >
+        <mat-icon>add</mat-icon>
+      </button>
+      <mat-form-field
+        class=""
+        style="width: 88%; margin: 20px;"
+        floatLabel="never"
+      >
+        <input
+          matInput
+          [(ngModel)]="searchTerm"
+          placeholder="Search"
+          autocomplete="off"
+          (keyup)="filterResults()"
+        />
+        <button
+          mat-button
+          matSuffix
+          mat-icon-button
+          aria-label="Clear"
+          (click)="onSearchClear()"
+        >
+          <mat-icon>close</mat-icon>
+        </button>
+      </mat-form-field>
+    </div>
+
+    <div class="table">
+      <mat-table [dataSource]="dataSource" class="mat-elevation-z8" matSort>
+        <!-- Display user's avatar -->
+        <ng-container matColumnDef="avatar">
+          <mat-header-cell *matHeaderCellDef> </mat-header-cell>
+          <mat-cell style="height: 70px" *matCellDef="let user">
+            <img
+              class="avatar"
+              (click)="do()"
+              [src]="user.avatar"
+              alt=""
+              [routerLink]="['/app/members', user.id]"
+              matTooltip="Go to profile"
+              matTooltipPosition="right"
+            />
+          </mat-cell>
+        </ng-container>
+
+        <!-- Display user's name -->
+        <ng-container matColumnDef="name">
+          <mat-header-cell *matHeaderCellDef mat-sort-header>
+            Name
+          </mat-header-cell>
+          <mat-cell *matCellDef="let user">
+            <h1>
+              <a class="name" [routerLink]="['/app/members', user.id]">
+                {{ user.firstName }} {{ user.lastName }}
+              </a>
+            </h1>
+          </mat-cell>
+        </ng-container>
+
+        <!-- Display user's sports -->
+        <ng-container matColumnDef="sports">
+          <mat-header-cell *matHeaderCellDef>
+            Sports
+          </mat-header-cell>
+          <mat-cell *matCellDef="let user">
+
+            <!-- Conditional logic to display non-generated user's sports (api workaround) -->
+            <div *ngIf="user.sportsAdded === null || user.sportsAdded.length; else default">
+              <h1>
+                {{ user.sportsAdded}}
+              </h1>
+            </div>
+
+            <ng-template #default>
+              <h1>
+                {{ user.sports[user.sid % 7] }}
+              </h1>
+            </ng-template>
+          </mat-cell>
+        </ng-container>
+
+        <!-- User Actions -->
+        <ng-container matColumnDef="actions">
+          <mat-header-cell *matHeaderCellDef>
+            Actions
+          </mat-header-cell>
+          <mat-cell *matCellDef="let user">
+            <button
+              mat-button
+              mat-icon-button
+              (click)="onEdit(user)"
+              matTooltip="Edit this member"
+            >
+              <mat-icon style="font-size: 2vh;" color="primary">edit</mat-icon>
+            </button>
+            <button
+              mat-button
+              mat-icon-button
+              (click)="onDelete(user)"
+              matTooltip="Delete this member"
+            >
+              <mat-icon style="font-size: 2vh;" color="warn">delete</mat-icon>
+            </button>
+          </mat-cell>
+        </ng-container>
+
+        <!-- Footer for "loading data" indication -->
+        <ng-container matColumnDef="loading">
+          <mat-footer-cell *matFooterCellDef colspan="6">
+            <mat-spinner [diameter]="30"></mat-spinner>
+            Loading data...
+          </mat-footer-cell>
+        </ng-container>
+
+        <!-- Paginator -->
+        <ng-container matColumnDef="paginator">
+          <mat-footer-cell *matFooterCellDef colspan="6">
+            <mat-paginator
+              [pageSizeOptions]="[5, 10, 25]"
+              [pageSize]="5"
+            ></mat-paginator>
+          </mat-footer-cell>
+        </ng-container>
+
+        <!-- Required mat-table directives -->
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+        <mat-footer-row
+          *matFooterRowDef="['loading']"
+          [ngClass]="{ hide: dataSource !== null }"
+        ></mat-footer-row>
+        <mat-footer-row
+          *matFooterRowDef="['paginator']"
+          [ngClass]="{ hide: dataSource == null }"
+        ></mat-footer-row>
+      </mat-table>
+    </div>
+  </div>
+</ng-container>

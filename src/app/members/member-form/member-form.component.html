@@ -1,0 +1,86 @@
+<mat-toolbar>
+  <h1>
+   {{data.type === "create" ? "New Member" : "Edit member"}}
+</h1>
+</mat-toolbar>
+
+
+<!--  First name field  -->
+<form [formGroup]="formService.form">
+  <div class="field-container">
+    <mat-form-field floatLabel="never">
+      <input
+        matInput
+        placeholder="First name"
+        formControlName = "firstName"
+        required
+      />
+      <mat-error>This field is required.</mat-error>
+    </mat-form-field>
+
+    <!-- Last name field -->
+    <mat-form-field floatLabel="never">
+      <input
+        matInput
+        placeholder="Last name"
+        formControlName = "lastName"
+        required
+      />
+      <mat-error>This field is required.</mat-error>
+    </mat-form-field>
+
+    <h2>Member in:</h2>
+
+
+      <mat-form-field color = "none"  class="chip-container">
+        <mat-chip-list #chipList formArrayName="sportsAdded">
+          <mat-chip *ngFor="let tag of formService.form.get('sportsAdded').controls; let i = index" [removable]="true" (removed)="onRemove(i, tag)" [formGroupName]="i">
+            {{tag.id ? tag.name : tag.value}}
+            <mat-icon matChipRemove>cancel</mat-icon>
+          </mat-chip> 
+         </mat-chip-list>
+      </mat-form-field>
+
+      
+    
+      <mat-chip-list>
+        <mat-chip *ngFor="let tag of tags" [selectable]="selectable" (click)="onSelect(tag)">
+          {{tag.id ? tag.name : tag.value}}
+        </mat-chip>
+      </mat-chip-list>
+
+
+    <!-- Sports field -->
+    <!-- <mat-form-field floatLabel="never">
+        <input
+        placeholder = "Enter sports..."
+          matInput
+          formControlName = "sportsAdded"
+        />
+      </mat-form-field> -->
+
+      <mat-dialog-actions>
+      <button
+        mat-dialog-option
+        mat-stroked-button
+        (click)="onClose()"
+        [mat-dialog-close]="false"
+        style="margin: 5px;"
+        color="accent"
+      >
+        CANCEL
+      </button>
+      <button
+      mat-dialog-options
+        [disabled] = "formService.form.invalid"
+        mat-raised-button
+        color="primary"
+        type="submit"
+        [mat-dialog-close]="true"
+        style="margin: 5px;"
+      >
+        SUBMIT
+      </button>
+    </mat-dialog-actions>
+  </div>
+</form>

@@ -1,0 +1,28 @@
+mat-toolbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 2;
+  width: 100% !important;
+  margin-bottom: 20px;
+  background-color: #013948;
+  color: white;
+  height: 10vh;
+}
+
+.header-content-wrapper {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  width: 100vw;
+}
+
+a {
+  margin-left: 25px;
+  cursor: pointer;
+  font-size: 2vh;
+}
+
+a :hover {
+  color: gray;
+}

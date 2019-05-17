@@ -1,0 +1,70 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.table {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.avatar {
+  border-radius: 50%;
+  width: 50px;
+  margin: -5px;
+  cursor: pointer;
+}
+
+
+mat-table {
+  width: 95%;
+}
+
+h1 {
+    font-size: 1.5vh; font-weight: 100; word-break: break-word
+}
+
+h1 a {
+  cursor: pointer;
+}
+
+h1 :hover {
+  color: gray;
+}
+
+mat-icon {
+  cursor: pointer;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+a :visited {
+  /* text-decoration: none; */
+  color: inherit;
+}
+
+mat-header-cell {
+  display: flex;
+  justify-content: center;
+}
+
+mat-cell {
+  display: flex !important;
+  justify-content: center !important;
+  text-align: center;
+}
+
+.hide {
+  display: none;
+}
+
+mat-footer-row mat-footer-cell {
+  justify-content: center;
+  font-style: italic;
+}

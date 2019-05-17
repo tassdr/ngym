@@ -1,0 +1,68 @@
+.wrapper {
+  display: flex;
+  justify-content: center;
+  height: 90vh;
+}
+
+.container1,
+.container2 {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
+
+.inner-wrapper {
+  flex-direction: column;
+  margin-top: 30px;
+}
+
+mat-card {
+  width: 95%;
+  margin-top: 12vh;
+}
+
+h1 {
+  font-size: 2.5vh;
+  margin-left: 15px;
+  font-weight: 150;
+  color: #262626;
+}
+
+.smaller-text {
+  font-size: 2vh;
+  font-weight: 100;
+  word-break: break-word;
+}
+
+.profile-photo {
+  border-radius: 50%;
+  border: 1px solid gray;
+  height: 20vh;
+  width: 40vw;
+}
+
+.edit-button {
+  margin-top: 20px;
+  align-self: center;
+}
+
+.mat-chip-list :focus {
+  display: none;
+  outline: none;
+}
+
+@media only screen and (min-width: 800px) {
+  mat-card {
+    width: 30%;
+    margin-top: 12vh;
+    height: 60%;
+  }
+
+  .profile-photo {
+    border-radius: 50%;
+    border: 1px solid gray;
+    height: 14vh;
+    width: 18vh;
+  }
+}

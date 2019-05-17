@@ -1,0 +1,54 @@
+<div class="wrapper">
+  <mat-card class="mat-elevation-z8">
+    <div class="container1">
+      <img class="profile-photo" [src]="user.avatar" />
+      <div class="inner-wrapper">
+        <div style="display: flex; flex-direction: column;">
+          <div style="display: flex">
+            <mat-icon style="font-size: 3.5vh; align-self: center"
+              >account_circle</mat-icon
+            >
+            <h1>
+              ABOUT
+            </h1>
+          </div>
+          <h1>First name: {{ user.firstName }}</h1>
+          <h1>Last name: {{ user.lastName }}</h1>
+        </div>
+
+        <div style="display: flex;">
+          <mat-icon style="font-size: 3.5vh; align-self: center"
+            >card_membership</mat-icon
+          >
+          <h1>
+            MEMBER IN
+          </h1>
+        </div>
+
+        <div *ngIf="user.sportsAdded === null || user.sportsAdded.length; else default">
+          <mat-chip-list>
+          <mat-chip *ngFor = "let sport of user.sportsAdded">
+            {{sport}}
+          </mat-chip>
+        </mat-chip-list>
+        </div>
+
+        <ng-template #default>
+            <mat-chip-list>
+                <mat-chip *ngFor ="let sport of generatedSportsArray">
+              {{sport}}
+                </mat-chip>
+              </mat-chip-list>
+        </ng-template>
+      </div>
+      <button
+        class="edit-button"
+        (click)="onEdit()"
+        mat-raised-button
+        color="accent"
+      >
+        EDIT
+      </button>
+    </div>
+  </mat-card>
+</div>

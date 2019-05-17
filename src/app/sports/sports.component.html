@@ -1,0 +1,17 @@
+<div class = "wrapper">
+  <mat-card class="mat-elevation-z8" style = "max-width: 400px; min-height: 50vh" *ngFor = "let sport of sports">
+    <h1>{{sport.name}}</h1>
+    <img mat-card-image src="{{sport.avatar}}" alt="alt">
+    <mat-card-content>
+      <p>
+        {{sport.description}}
+      </p>
+    </mat-card-content>
+  </mat-card>
+  <button (click) = "onAddNewSport()"  mat-fab class = "fab-button" matTooltip = "Add new sport">
+    <mat-icon>add
+
+    </mat-icon>
+    
+  </button>
+</div>
